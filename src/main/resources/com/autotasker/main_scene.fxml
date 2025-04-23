@@ -30,13 +30,12 @@
 
     <TableView fx:id="taskTable" prefHeight="250">
         <columns>
+            <TableColumn fx:id="rowNumberColumn" text="No." />
             <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="200" text="Description" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="250" text="Description" />
             <TableColumn fx:id="dueDateColumn" prefWidth="120" text="Due Date" />
-            <TableColumn fx:id="completedColumn" prefWidth="150" text="Completed" />
-            <TableColumn fx:id="actionColumn" prefWidth="350" text="Actions">
-
-            </TableColumn>
+            <TableColumn fx:id="statusColumn" text="Status" />
+            <TableColumn fx:id="actionColumn" prefWidth="120" text="Actions" />
         </columns>
     </TableView>
     <ToolBar>

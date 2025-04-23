@@ -5,10 +5,12 @@ import com.autotasker.model.TaskDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,13 +33,15 @@ public class Controller {
     @FXML
     private TableView<Task> taskTable;
     @FXML
+    private TableColumn<Task, Number> rowNumberColumn;
+    @FXML
     private TableColumn<Task, String> nameColumn;
     @FXML
     private TableColumn<Task, String> descriptionColumn;
     @FXML
     private TableColumn<Task, String> dueDateColumn;
     @FXML
-    private TableColumn<Task, Boolean> completedColumn;
+    private TableColumn<Task, Void> statusColumn;
     @FXML
     private TableColumn<Task, Void> actionColumn;  // For Action buttons
 
@@ -53,40 +57,65 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        ensureOnlyOneCheckboxIsSelected();
-
-
+        ensureOnlyOneCheckboxIsSelected(filterCompleteCheckBox, filterIncompleteCheckBox);
+        
         // Setting up the cell value factories for columns
+        rowNumberColumn.setCellFactory(col -> new TableCell<Task, Number>() {
+            @Override
+            protected void updateItem(Number item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                    setText(null);
+                } else {
+                    setText(String.valueOf(getIndex() + 1));
+                }
+            }
+        });
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
         dueDateColumn.setCellValueFactory(cellData -> cellData.getValue().dueDateProperty());
-        completedColumn.setCellValueFactory(new PropertyValueFactory<>("completed"));
-        completedColumn.setCellFactory(col -> new TableCell<Task, Boolean>() {
+        statusColumn.setCellFactory(col -> new TableCell<>() {
             @Override
-            protected void updateItem(Boolean completed, boolean empty) {
-                super.updateItem(completed, empty);
-                if (empty || completed == null) {
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                     setText(null);
                 } else {
-                    setText(completed ? "✅" : "❌");
+                    Task task = getTableRow().getItem();
+                    if (task.isCompleted()) {
+                        setText("✅ Completed");
+                        setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+                    } else if (task.isInProgress()) {
+                        setText("⌛ In Progress");
+                        setStyle("-fx-text-fill: orange; -fx-font-weight: bold;");
+                    } else {
+                        setText("❌ To do");
+                        setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                    }
                 }
             }
         });
 
         // Setting up the action buttons in the table
         actionColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button markCompleteBtn = new Button("Mark as completed");
-            private final Button deleteBtn = new Button("Delete task");
+            private final Button setInProgressBtn = new Button("⌛");
+            private final Button markCompleteBtn = new Button("✅");
             private final Button editBtn = new Button("✎");
+//            buttons style
+//            {
+//                setInProgressBtn.setStyle("-fx-background-color: #f8deae; -fx-text-fill: #4f3605; -fx-border-color: #f5cb7d; -fx-border-width: 2; -fx-border-radius: 50%; -fx-background-radius: 50%;");
+//                markCompleteBtn.setStyle("-fx-background-color: #bffcbf; -fx-text-fill: #014101; -fx-border-color: #6af86a; -fx-border-width: 2; -fx-border-radius: 50%; -fx-background-radius: 50%;");
+//                editBtn.setStyle("-fx-background-color: #79f3f3; -fx-text-fill: #3c4e54;  -fx-border-color: #20b0b0; -fx-border-width: 2; -fx-border-radius: 50%; -fx-background-radius: 50%;");
+//            }
 
             {
+                setInProgressBtn.setOnAction(event -> {
+                    Task task = getTableView().getItems().get(getIndex());
+                    handleSetInProgress(task);
+                });
                 markCompleteBtn.setOnAction(event -> {
                     Task task = getTableView().getItems().get(getIndex());
                     markAsCompleted(task);
-                });
-                deleteBtn.setOnAction(event -> {
-                    Task task = getTableView().getItems().get(getIndex());
-                    deleteTask(task);
                 });
                 editBtn.setOnAction(event -> {
                     Task task = getTableView().getItems().get(getIndex());
@@ -97,13 +126,24 @@ public class Controller {
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                     setGraphic(null);
-                } else {
-                    // Create a horizontal layout with two buttons
-                    HBox hBox = new HBox(10, markCompleteBtn, deleteBtn, editBtn);
-                    setGraphic(hBox);
+                    return;
                 }
+
+                Task task = getTableRow().getItem();
+
+                HBox hBox = new HBox(10);
+                hBox.setAlignment(Pos.CENTER_RIGHT);
+                if (!task.isCompleted() && !task.isInProgress()) {
+                    hBox.getChildren().add(setInProgressBtn);
+                }
+                if (!task.isCompleted()) {
+                    hBox.getChildren().add(markCompleteBtn);
+                }
+
+                hBox.getChildren().addAll(editBtn);
+                setGraphic(hBox);
             }
         });
 
@@ -133,33 +173,6 @@ public class Controller {
             });
             return row;
         });
-    }
-
-    private void showTaskDetailDialog(Task task) {
-        Stage dialog = new Stage();
-        dialog.setTitle("Task details");
-        dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.initOwner(taskTable.getScene().getWindow());
-
-        Label nameLabel = new Label("Name: " + task.getName());
-        Label dueDateLabel = new Label("Due Date: " + task.getDueDate());
-        Label descriptionLabel = new Label("Description: ");
-        TextArea descriptionArea = new TextArea(task.getDescription());
-        descriptionArea.setEditable(false);
-        descriptionArea.setWrapText(true);
-        descriptionArea.setStyle(" -fx-border-color: transparent; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
-        Label createDateLabel = new Label("Created at: " + task.getCreatedAt());
-        Button closeBtn = new Button("Close");
-        closeBtn.setOnAction(event -> {
-            dialog.close();
-        });
-
-        VBox vBox = new VBox(10, nameLabel, dueDateLabel, descriptionLabel, descriptionArea, createDateLabel, closeBtn);
-        vBox.setPadding(new Insets(15));
-
-        Scene scene = new Scene(vBox, 400, 300);
-        dialog.setScene(scene);
-        dialog.showAndWait();
     }
 
     @FXML
@@ -220,6 +233,7 @@ public class Controller {
     private void markAsCompleted(Task task) {
         if (task != null) {
             task.setCompleted(true);
+            task.setInProgress(false);
             taskDAO.updateTask(task);
             allTasksCache = taskDAO.getAllTasks();
             loadTasks();  // Refresh task table
@@ -260,6 +274,34 @@ public class Controller {
         taskTable.getItems().setAll(upcoming);
     }
 
+    private void showTaskDetailDialog(Task task) {
+        Stage dialog = new Stage();
+        dialog.setTitle("Task details");
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.initOwner(taskTable.getScene().getWindow());
+
+        Label nameLabel = new Label("Name: " + task.getName());
+        Label dueDateLabel = new Label("Due Date: " + task.getDueDate());
+        Label descriptionLabel = new Label("Description: ");
+        TextArea descriptionArea = new TextArea(task.getDescription());
+        descriptionArea.setEditable(false);
+        descriptionArea.setWrapText(true);
+        descriptionArea.setStyle(" -fx-border-color: transparent; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+        Label statusLabel = new Label("Status: " + (task.isInProgress() ? "In Progress" : task.isCompleted() ? "Completed" : "TODO"));
+        Label createDateLabel = new Label("Created at: " + task.getCreatedAt());
+        Button closeBtn = new Button("Close");
+        closeBtn.setOnAction(event -> {
+            dialog.close();
+        });
+
+        VBox vBox = new VBox(10, nameLabel, dueDateLabel, descriptionLabel, descriptionArea, statusLabel, createDateLabel, closeBtn);
+        vBox.setPadding(new Insets(15));
+
+        Scene scene = new Scene(vBox, 400, 300);
+        dialog.setScene(scene);
+        dialog.showAndWait();
+    }
+
     private void openEditTaskDialog(Task task) {
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Edit Task");
@@ -271,12 +313,19 @@ public class Controller {
         DatePicker dueDatePicker = new DatePicker(task.getDueDate());
         CheckBox completedCheckBox = new CheckBox("Completed");
         completedCheckBox.setSelected(task.isCompleted());
+        CheckBox inProgressCheckBox = new CheckBox("In Progress");
+        inProgressCheckBox.setSelected(task.isInProgress());
+
+        ensureOnlyOneCheckboxIsSelected(completedCheckBox, inProgressCheckBox);
 
         VBox nameBox = createLabeledInput("Name", nameField);
         VBox descriptionBox = createLabeledInput("Description", descriptionField);
         VBox dueDateBox = createLabeledInput("Due Date", dueDatePicker);
+        HBox completedProgressBox = new HBox(10);
+        completedProgressBox.getChildren().addAll(completedCheckBox, inProgressCheckBox);
 
         Button saveButton = new Button("Save Changes");
+        Button deleteBtn = new Button("Delete task");
         Button cancelButton = new Button("Cancel");
 
         saveButton.setOnAction(event -> {
@@ -284,18 +333,26 @@ public class Controller {
             task.setDescription(descriptionField.getText());
             task.setDueDate(dueDatePicker.getValue());
             task.setCompleted(completedCheckBox.isSelected());
+            task.setInProgress(inProgressCheckBox.isSelected());
             taskDAO.updateTask(task);
             allTasksCache = taskDAO.getAllTasks();
             loadTasks();
             dialogStage.close();
         });
 
+        deleteBtn.setOnAction(event -> {
+            deleteTask(task);
+            dialogStage.close();
+        });
+
         cancelButton.setOnAction(event -> dialogStage.close());
 
         HBox buttons = new HBox(10, saveButton, cancelButton);
-
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        HBox allBtns = new HBox(10, buttons, spacer, deleteBtn);
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(nameBox, descriptionBox, dueDateBox, completedCheckBox, buttons);
+        layout.getChildren().addAll(nameBox, descriptionBox, dueDateBox, completedProgressBox, allBtns);
         layout.setPadding(new Insets(15));
 
         Scene scene = new Scene(layout);
@@ -307,6 +364,17 @@ public class Controller {
     private VBox createLabeledInput(String labelText, Control oldValue) {
         Label label = new Label(labelText);
         return new VBox(5, label, oldValue);
+    }
+
+    private void handleSetInProgress(Task task) {
+        if (task.isCompleted()) {
+            showAlert("Can't mark as 'In Progress' - task is already completed.");
+            return;
+        }
+        task.setInProgress(true);
+        taskDAO.updateTask(task);
+        allTasksCache = taskDAO.getAllTasks();
+        loadTasks();
     }
 
     private void handleEditTask(Task task) {
@@ -335,17 +403,17 @@ public class Controller {
         return tasks;
     }
 
-    private void ensureOnlyOneCheckboxIsSelected() {
-        filterIncompleteCheckBox.selectedProperty()
+    private void ensureOnlyOneCheckboxIsSelected(CheckBox completed, CheckBox second) {
+        second.selectedProperty()
                 .addListener((obs, wasSelected, isSelected) -> {
                     if (isSelected) {
-                        filterCompleteCheckBox.setSelected(false);
+                        completed.setSelected(false);
                     }
                 });
-        filterCompleteCheckBox.selectedProperty()
+        completed.selectedProperty()
                 .addListener((obs, wasSelected, isSelected) -> {
                     if (isSelected) {
-                        filterIncompleteCheckBox.setSelected(false);
+                        second.setSelected(false);
                     }
                 });
     }

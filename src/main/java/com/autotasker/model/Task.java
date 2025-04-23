@@ -32,6 +32,8 @@ public class Task {
 
     @Column(name = "completed")
     private boolean completed;
+    @Column(name = "in_progress")
+    private boolean inProgress;
 
     public Task() {
     }
@@ -93,6 +95,14 @@ public class Task {
         this.completed = completed;
     }
 
+    public boolean isInProgress() {
+        return inProgress;
+    }
+
+    public void setInProgress(boolean inProgress) {
+        this.inProgress = inProgress;
+    }
+
     public StringProperty nameProperty() {
         return new SimpleStringProperty(name);
     }
@@ -107,5 +117,9 @@ public class Task {
 
     public BooleanProperty completedProperty() {
         return new SimpleBooleanProperty(completed);
+    }
+
+    public BooleanProperty inProgressProperty() {
+        return new SimpleBooleanProperty(inProgress);
     }
 }
