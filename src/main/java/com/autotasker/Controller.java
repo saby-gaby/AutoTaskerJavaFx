@@ -269,6 +269,8 @@ public class Controller {
         TextField nameField = new TextField(task.getName());
         TextField descriptionField = new TextField(task.getDescription());
         DatePicker dueDatePicker = new DatePicker(task.getDueDate());
+        CheckBox completedCheckBox = new CheckBox("Completed");
+        completedCheckBox.setSelected(task.isCompleted());
 
         VBox nameBox = createLabeledInput("Name", nameField);
         VBox descriptionBox = createLabeledInput("Description", descriptionField);
@@ -281,6 +283,7 @@ public class Controller {
             task.setName(nameField.getText());
             task.setDescription(descriptionField.getText());
             task.setDueDate(dueDatePicker.getValue());
+            task.setCompleted(completedCheckBox.isSelected());
             taskDAO.updateTask(task);
             allTasksCache = taskDAO.getAllTasks();
             loadTasks();
@@ -292,7 +295,7 @@ public class Controller {
         HBox buttons = new HBox(10, saveButton, cancelButton);
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(nameBox, descriptionBox, dueDateBox, buttons);
+        layout.getChildren().addAll(nameBox, descriptionBox, dueDateBox, completedCheckBox, buttons);
         layout.setPadding(new Insets(15));
 
         Scene scene = new Scene(layout);
