@@ -1,6 +1,6 @@
 package com.autotasker.controller;
 
-import com.autotasker.controller.util.OneCheckboxSelected;
+import com.autotasker.util.OneCheckboxSelected;
 import com.autotasker.model.Task;
 import com.autotasker.model.TaskDAO;
 import javafx.fxml.FXML;

@@ -1,4 +1,4 @@
-package com.autotasker.controller.util;
+package com.autotasker.util;
 
 import javafx.scene.control.Alert;
 

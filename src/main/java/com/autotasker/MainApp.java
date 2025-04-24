@@ -1,6 +1,6 @@
 package com.autotasker;
 
-import com.autotasker.controller.util.WarningAlert;
+import com.autotasker.util.WarningAlert;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
