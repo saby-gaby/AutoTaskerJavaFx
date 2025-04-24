@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.autotasker.controller.TaskDetailController"
+      styleClass="task-detail-window">
+    <Label fx:id="nameLabel"/>
+    <Label fx:id="dueDateLabel"/>
+    <Label text="Description: "/>
+    <TextArea fx:id="descriptionArea" editable="false" wrapText="true" styleClass="description-area"/>
+    <Label fx:id="statusLabel"/>
+    <Label fx:id="createDateLabel"/>
+    <Button text="Close" onAction="#handleClose"/>
+</VBox>

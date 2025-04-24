@@ -9,4 +9,6 @@ module com.autotasker.autotasker {
     opens com.autotasker.model to org.hibernate.orm.core, javafx.base;
     opens com.autotasker to javafx.fxml;
     exports com.autotasker;
+    exports com.autotasker.controller;
+    opens com.autotasker.controller to javafx.fxml;
 }

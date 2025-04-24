@@ -1,0 +1,81 @@
+.main-window {
+    -fx-spacing: 10;
+}
+
+.search-box {
+    -fx-spacing: 10;
+    -fx-hgrow: always;
+}
+
+.search-field {
+    -fx-alignment: right;
+}
+
+.action-buttons {
+    -fx-alignment: center-right;
+}
+
+.label-completed {
+    -fx-text-fill: #017301;
+    -fx-font-weight: bold;
+}
+
+.label-inProgress {
+    -fx-text-fill: #29c4c4;
+    -fx-font-weight: bold;
+}
+
+.label-todo {
+    -fx-text-fill: rgb(203,23,17);
+    -fx-font-weight: bold;
+}
+
+.description-area {
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.task-detail-window, .edit-task-window {
+    -fx-spacing: 10;
+    -fx-padding: 15;
+}
+
+.completed-progress-box, .edit-window-buttons {
+    -fx-spacing: 10;
+}
+
+.edit-task-window {
+    -fx-min-width: 400;
+}
+
+.add-task-box {
+    -fx-spacing: 10;
+    -fx-padding: 10px 10px 0px 10px;
+}
+/*.button-in-progress {
+    -fx-background-color: #f8deae;
+    -fx-text-fill: #4f3605;
+    -fx-border-color: #f5cb7d;
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}*/
+
+/*.button-complete {
+    -fx-background-color: #bffcbf;
+    -fx-text-fill: #014101;
+    -fx-border-color: #6af86a;
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}*/
+
+/*.button-edit {
+    -fx-background-color: #79f3f3;
+    -fx-text-fill: #3c4e54;
+    -fx-border-color: #20b0b0;
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}*/
