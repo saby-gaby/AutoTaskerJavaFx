@@ -10,7 +10,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.CheckBox?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.autotasker.controller.EditTaskController"
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.autotasker.controller.EditTaskController"
       styleClass="edit-task-window">
     <VBox>
         <Label text="Name"/>
@@ -22,7 +24,7 @@
     </VBox>
     <VBox>
         <Label text="Due date" />
-        <DatePicker fx:id="dueDatePicker" />
+        <DatePicker fx:id="dueDatePicker" promptText="MM/DD/YYYY" />
     </VBox>
 
     <HBox styleClass="completed-progress-box">

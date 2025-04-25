@@ -15,37 +15,38 @@
       fx:controller="com.autotasker.controller.MainController"
       styleClass="main-window">
     <HBox styleClass="add-task-box">
-        <TextField fx:id="taskNameField" promptText="Task name" />
-        <TextField fx:id="taskDescriptionField" promptText="Task description" />
-        <DatePicker fx:id="dueDatePicker" />
-        <Button onAction="#handleAddTask" text="Add Task" />
-        <HBox styleClass="search-box" alignment="TOP_RIGHT" spacing="10" HBox.hgrow="ALWAYS">
-            <TextField fx:id="searchField" styleClass="search-field" layoutX="150" layoutY="10" promptText="Search tasks" />
+        <TextField fx:id="taskNameField" promptText="Task name"/>
+        <TextField fx:id="taskDescriptionField" promptText="Task description"/>
+        <DatePicker fx:id="dueDatePicker" promptText="MM/DD/YYYY"/>
+        <Button onAction="#handleAddTask" text="Add Task"/>
+        <HBox styleClass="search-box" HBox.hgrow="ALWAYS">
+            <TextField fx:id="searchField" promptText="Search tasks"/>
         </HBox>
     </HBox>
-
-    <TableView fx:id="taskTable" prefHeight="250">
-        <columns>
-            <TableColumn fx:id="rowNumberColumn" text="No." />
-            <TableColumn fx:id="nameColumn" prefWidth="100" text="Name" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="250" text="Description" />
-            <TableColumn fx:id="dueDateColumn" prefWidth="120" text="Due Date" />
-            <TableColumn fx:id="statusColumn" text="Status" />
-            <TableColumn fx:id="actionColumn" prefWidth="120" text="Actions" />
-        </columns>
-    </TableView>
-    <ToolBar>
-        <HBox alignment="TOP_LEFT" spacing="10" HBox.hgrow="ALWAYS">
-            <CheckBox fx:id="filterIncompleteCheckBox" onAction="#loadTasks" text="Incompleted" />
-            <CheckBox fx:id="filterCompleteCheckBox" onAction="#loadTasks" text="Completed" />
-        </HBox>
-        <HBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
-            <Button onAction="#handleShowAllTasks" text="Show all" />
-            <Button onAction="#handleShowUpcoming" text="Upcoming" />
-        </HBox>
-        <HBox alignment="TOP_RIGHT" spacing="10" HBox.hgrow="ALWAYS">
-            <DatePicker fx:id="filterDatePicker" promptText="MM/DD/YYYY" />
-            <Button onAction="#handleFilterByDate" text="Filter for date" />
-        </HBox>
-    </ToolBar>
+    <VBox>
+        <TableView fx:id="taskTable" styleClass="task-table">
+            <columns>
+                <TableColumn fx:id="rowNumberColumn" text="No."/>
+                <TableColumn fx:id="nameColumn" text="Name"/>
+                <TableColumn fx:id="descriptionColumn" text="Description"/>
+                <TableColumn fx:id="dueDateColumn" text="Due Date"/>
+                <TableColumn fx:id="statusColumn" text="Status"/>
+                <TableColumn fx:id="actionColumn" text="Actions"/>
+            </columns>
+        </TableView>
+        <ToolBar>
+            <HBox HBox.hgrow="ALWAYS" styleClass="filter-checkbox">
+                <CheckBox fx:id="filterIncompleteCheckBox" onAction="#loadTasks" text="Unfinished"/>
+                <CheckBox fx:id="filterCompleteCheckBox" onAction="#loadTasks" text="Completed"/>
+            </HBox>
+            <HBox styleClass="filter-buttons">
+                <Button onAction="#handleShowAllTasks" text="Show all"/>
+                <Button onAction="#handleShowUpcoming" text="Upcoming"/>
+            </HBox>
+            <HBox HBox.hgrow="ALWAYS" styleClass="filter-by-date">
+                <DatePicker fx:id="filterDatePicker" promptText="MM/DD/YYYY"/>
+                <Button onAction="#handleFilterByDate" text="Filter for date"/>
+            </HBox>
+        </ToolBar>
+    </VBox>
 </VBox>

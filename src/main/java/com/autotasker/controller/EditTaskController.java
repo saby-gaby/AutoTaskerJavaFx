@@ -24,7 +24,6 @@ public class EditTaskController {
         descriptionArea.setText(task.getDescription());
 
         if (task.getDueDate() != null) dueDatePicker.setValue(task.getDueDate());
-        else dueDatePicker.setPromptText("MM/DD/YYYY");
 
         completedCheckBox.setSelected(task.isCompleted());
         inProgressCheckBox.setSelected(task.isInProgress());

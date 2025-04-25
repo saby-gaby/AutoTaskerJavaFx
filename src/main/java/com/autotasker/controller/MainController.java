@@ -105,6 +105,9 @@ public class MainController {
             private final Button editBtn = new Button("✎");
 
             {
+                setInProgressBtn.getStyleClass().add("in-progress-btn");
+                markCompleteBtn.getStyleClass().add("completed-btn");
+                editBtn.getStyleClass().add("edit-btn");
                 setInProgressBtn.setOnAction(event -> {
                     Task task = getTableView().getItems().get(getIndex());
                     handleSetInProgress(task);

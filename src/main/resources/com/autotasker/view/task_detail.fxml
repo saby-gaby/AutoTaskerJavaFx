@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,7 +9,7 @@
     <Label fx:id="nameLabel"/>
     <Label fx:id="dueDateLabel"/>
     <Label text="Description: "/>
-    <TextArea fx:id="descriptionArea" editable="false" wrapText="true" styleClass="description-area"/>
+    <TextArea fx:id="descriptionArea" editable="false" wrapText="true" />
     <Label fx:id="statusLabel"/>
     <Label fx:id="createDateLabel"/>
     <Button text="Close" onAction="#handleClose"/>

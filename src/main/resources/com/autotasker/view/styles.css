@@ -1,14 +1,39 @@
-.main-window {
+.main-window,
+.filter-checkbox,
+.filter-by-date {
     -fx-spacing: 10;
+    -fx-font-size: 16;
+}
+
+#dueDatePicker {
+    -fx-pref-width: 160;
 }
 
 .search-box {
+    -fx-alignment: top-right;
     -fx-spacing: 10;
     -fx-hgrow: always;
 }
 
-.search-field {
-    -fx-alignment: right;
+#searchField {
+    -fx-hgrow: always;
+    -fx-min-width: 200;
+}
+
+.task-table {
+    -fx-pref-height: 300;
+}
+
+#nameColumn {
+    -fx-pref-width: 100;
+}
+
+#descriptionColumn {
+    -fx-pref-width: 250;
+}
+
+#dueDateColumn, #actionColumn {
+    -fx-pref-width: 120;
 }
 
 .action-buttons {
@@ -26,11 +51,25 @@
 }
 
 .label-todo {
-    -fx-text-fill: rgb(203,23,17);
+    -fx-text-fill: rgb(203, 23, 17);
     -fx-font-weight: bold;
 }
 
-.description-area {
+.filter-checkbox{
+    -fx-alignment: center-left;
+}
+
+.filter-buttons {
+    -fx-alignment: top-center;
+    -fx-spacing: 10;
+    -fx-hgrow: always;
+}
+
+.filter-by-date {
+    -fx-alignment: top-right;
+}
+
+#descriptionArea {
     -fx-border-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -39,6 +78,7 @@
 .task-detail-window, .edit-task-window {
     -fx-spacing: 10;
     -fx-padding: 15;
+    -fx-font-size: 16;
 }
 
 .completed-progress-box, .edit-window-buttons {
@@ -53,29 +93,36 @@
     -fx-spacing: 10;
     -fx-padding: 10px 10px 0px 10px;
 }
-/*.button-in-progress {
-    -fx-background-color: #f8deae;
-    -fx-text-fill: #4f3605;
-    -fx-border-color: #f5cb7d;
-    -fx-border-width: 2;
-    -fx-border-radius: 50%;
-    -fx-background-radius: 50%;
-}*/
 
-/*.button-complete {
-    -fx-background-color: #bffcbf;
-    -fx-text-fill: #014101;
-    -fx-border-color: #6af86a;
-    -fx-border-width: 2;
-    -fx-border-radius: 50%;
-    -fx-background-radius: 50%;
-}*/
+#deleteButton {
+    -fx-graphic: url("../icons/trash-bin.png");
+    -fx-content-display: graphic-only;
+}
 
-/*.button-edit {
-    -fx-background-color: #79f3f3;
-    -fx-text-fill: #3c4e54;
-    -fx-border-color: #20b0b0;
-    -fx-border-width: 2;
-    -fx-border-radius: 50%;
+.edit-btn {
+    -fx-graphic: url("../icons/edit16px.png");
+    -fx-content-display: graphic-only;
+    -fx-padding: 5 7;
+    -fx-background-color: transparent;
+}
+
+.in-progress-btn {
+    -fx-graphic: url("../icons/process.png");
+    -fx-content-display: graphic-only;
+    -fx-padding: 5 7;
+    -fx-background-color: transparent;
+}
+
+.completed-btn {
+    -fx-graphic: url("../icons/checked.png");
+    -fx-content-display: graphic-only;
+    -fx-padding: 5 7;
+    -fx-background-color: transparent;
+}
+
+.edit-btn:hover,
+.in-progress-btn:hover,
+.completed-btn:hover {
+    -fx-background-color: rgba(255, 192, 203, 0.75);
     -fx-background-radius: 50%;
-}*/
+}
