@@ -1,0 +1,12 @@
+
+#descriptionArea {
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.task-detail-window {
+    -fx-spacing: 10;
+    -fx-padding: 15;
+    -fx-font-size: 16;
+}
