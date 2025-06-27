@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 public class TaskDetailController {
     @FXML private Label nameLabel;
+    @FXML private Label assignedToLabel;
     @FXML private Label dueDateLabel;
     @FXML private TextArea descriptionArea;
     @FXML private Label statusLabel;
@@ -21,6 +22,15 @@ public class TaskDetailController {
 
     public void setTask(Task task) {
         nameLabel.setText("Name: " + task.getName());
+        String assignedTo;
+        if (task.getAssignedUser() != null) {
+            assignedTo = task.getAssignedUser().getUsername();
+        } else if (task.getAssignedDepartment() != null) {
+            assignedTo = task.getAssignedDepartment().getDepartmentName();
+        } else {
+            assignedTo = "Unassigned";
+        }
+        assignedToLabel.setText("Assigned to: " + assignedTo);
         dueDateLabel.setText("Due Date: " + task.getDueDate());
         descriptionArea.setText(task.getDescription());
         statusLabel.setText("Status: " + (task.isInProgress() ? "In Progress" : task.isCompleted() ? "Completed" : "TODO"));
