@@ -3,13 +3,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.autotasker.controller.TaskDetailController"
-      styleClass="task-detail-window">
+      styleClass="task-detail-window"
+      stylesheets="@task_detail_styles.css">
     <Label fx:id="nameLabel"/>
+    <Label fx:id="assignedToLabel"/>
     <Label fx:id="dueDateLabel"/>
     <Label text="Description: "/>
-    <TextArea fx:id="descriptionArea" editable="false" wrapText="true" />
+    <TextArea fx:id="descriptionArea" editable="false" wrapText="true"/>
     <Label fx:id="statusLabel"/>
     <Label fx:id="createDateLabel"/>
     <Button text="Close" onAction="#handleClose"/>
