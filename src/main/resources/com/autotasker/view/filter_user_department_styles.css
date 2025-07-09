@@ -1,0 +1,9 @@
+.filter-window {
+    -fx-spacing: 10;
+    -fx-font-size: 16;
+    -fx-padding: 15;
+}
+
+.filter-box {
+    -fx-spacing: 10;
+}
