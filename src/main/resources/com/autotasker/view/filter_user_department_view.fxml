@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.autotasker.controller.FilterUserDepartmentController"
+      styleClass="filter-window"
+      stylesheets="@filter_user_department_styles.css">
+        <HBox styleClass="filter-box">
+            <ComboBox fx:id="filterDepartmentComboBox" />
+            <ComboBox fx:id="filterUserComboBox" />
+        </HBox>
+
+    <HBox styleClass="edit-window-buttons" >
+        <Button fx:id="filterBtn" text="Filter" onAction="#handleFilter" />
+        <Button fx:id="cancelFilterBtn" text="Cancel" onAction="#handleCancel" />
+    </HBox>
+</VBox>
