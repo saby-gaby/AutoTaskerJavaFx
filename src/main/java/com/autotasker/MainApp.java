@@ -1,32 +1,38 @@
 package com.autotasker;
 
+import com.autotasker.util.JpaUtil;
 import com.autotasker.util.WarningAlert;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
 public class MainApp extends Application {
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+        boolean hasUsers = JpaUtil.hasAnyUsers();
+
+        String fxmlToLoad;
+        String title;
+
+        if (hasUsers) {
+            fxmlToLoad = "/com/autotasker/view/login.fxml";
+            title = "Login";
+        } else {
+            fxmlToLoad = "/com/autotasker/view/create_admin.fxml";
+            title = "Create Admin";
+        }
+
         try {
-            // load FXML file from right directory
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/main_scene.fxml"));
-            VBox root = loader.load();
-
-            // create scene
-            Scene scene = new Scene(root, 1000, 600);
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/autotasker/view/styles.css")).toExternalForm());
-
-            // setup on main window
-            primaryStage.setTitle("AutoTasker");
-            primaryStage.setScene(scene);
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlToLoad)));
+            primaryStage.setScene(new Scene(root, 450, 200));
+            primaryStage.setTitle(title);
             primaryStage.show();
         } catch (IOException e) {
-            new WarningAlert(e.getMessage()).showAlert();
+            new WarningAlert(e.getMessage()).showAndWait();
         }
     }
 
