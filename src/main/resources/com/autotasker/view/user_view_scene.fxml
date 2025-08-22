@@ -9,17 +9,22 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1"
+<VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.autotasker.controller.MainController"
-      styleClass="main-window">
+      fx:controller="com.autotasker.controller.UserViewController"
+      styleClass="user-window"
+      stylesheets="@user_view_styles.css">
+    <Label fx:id="welcomeLabel"/>
     <HBox styleClass="add-task-box">
-        <TextField fx:id="taskNameField" promptText="Task name"/>
-        <TextField fx:id="taskDescriptionField" promptText="Task description"/>
-        <DatePicker fx:id="dueDatePicker" promptText="MM/DD/YYYY"/>
-        <Button onAction="#handleAddTask" text="Add Task"/>
+        <Button id="addTask" text="New Task" onAction="#createNewTask"/>
+        <Button id="refreshButton" text="Refresh Table" onAction="#handleRefresh"/>
         <HBox styleClass="search-box" HBox.hgrow="ALWAYS">
+            <Button id="filterFor" text="Filter for User/Department" onAction="#filterForUserOrDepartment"/>
+        </HBox>
+        <HBox styleClass="search-box" HBox.hgrow="ALWAYS">
+            <Button id="searchMyTasks" text="My Tasks" onAction="#loadMyTasks"/>
             <TextField fx:id="searchField" promptText="Search tasks"/>
         </HBox>
     </HBox>
@@ -31,7 +36,8 @@
                 <TableColumn fx:id="descriptionColumn" text="Description"/>
                 <TableColumn fx:id="dueDateColumn" text="Due Date"/>
                 <TableColumn fx:id="statusColumn" text="Status"/>
-                <TableColumn fx:id="actionColumn" text="Actions"/>
+                <TableColumn fx:id="assignedToColumn" text="Assigned To"/>
+                <TableColumn fx:id="actionsColumn" text="Actions"/>
             </columns>
         </TableView>
         <ToolBar>
@@ -41,7 +47,7 @@
             </HBox>
             <HBox styleClass="filter-buttons">
                 <Button onAction="#handleShowAllTasks" text="Show all"/>
-                <Button onAction="#handleShowUpcoming" text="Upcoming"/>
+                <Button fx:id="upcomingButton" onAction="#handleShowUpcoming" text="Upcoming"/>
             </HBox>
             <HBox HBox.hgrow="ALWAYS" styleClass="filter-by-date">
                 <DatePicker fx:id="filterDatePicker" promptText="MM/DD/YYYY"/>
@@ -49,4 +55,9 @@
             </HBox>
         </ToolBar>
     </VBox>
+    <HBox>
+        <Button fx:id="adminViewBtn" text="Admin View" onAction="#openAdminView" />
+        <Button text="Change My Password" onAction="#showUpdatePasswordWindow"/>
+    </HBox>
+
 </VBox>
