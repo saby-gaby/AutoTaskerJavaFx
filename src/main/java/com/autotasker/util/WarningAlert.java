@@ -2,17 +2,16 @@ package com.autotasker.util;
 
 import javafx.scene.control.Alert;
 
-public class WarningAlert {
-    private final Alert alert;
+public class WarningAlert extends Alert {
 
     public WarningAlert(String message) {
-        alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning");
-        alert.setContentText(message);
+        super(Alert.AlertType.WARNING);
+        this.setTitle("Warning");
+        this.setHeaderText(message);
     }
 
     // Show an alert with a given message
-    public void showAlert() {
-        alert.showAndWait();
-    }
+//    public void showAlert() {
+//        alert.showAndWait();
+//    }
 }
