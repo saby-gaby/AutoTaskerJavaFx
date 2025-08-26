@@ -1,4 +1,10 @@
-.main-window,
+#welcomeLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+
+.user-window,
 .filter-checkbox,
 .filter-by-date {
     -fx-spacing: 10;
@@ -21,7 +27,7 @@
 }
 
 .task-table {
-    -fx-pref-height: 300;
+    -fx-pref-height: 350;
 }
 
 #nameColumn {
@@ -32,7 +38,7 @@
     -fx-pref-width: 250;
 }
 
-#dueDateColumn, #actionColumn {
+#dueDateColumn, #actionsColumn {
     -fx-pref-width: 120;
 }
 
@@ -59,7 +65,7 @@
     -fx-alignment: center-left;
 }
 
-.filter-buttons {
+.filter-buttons{
     -fx-alignment: top-center;
     -fx-spacing: 10;
     -fx-hgrow: always;
@@ -69,24 +75,8 @@
     -fx-alignment: top-right;
 }
 
-#descriptionArea {
-    -fx-border-color: transparent;
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-}
-
-.task-detail-window, .edit-task-window {
+.completed-progress-box {
     -fx-spacing: 10;
-    -fx-padding: 15;
-    -fx-font-size: 16;
-}
-
-.completed-progress-box, .edit-window-buttons {
-    -fx-spacing: 10;
-}
-
-.edit-task-window {
-    -fx-min-width: 400;
 }
 
 .add-task-box {
@@ -94,10 +84,6 @@
     -fx-padding: 10px 10px 0px 10px;
 }
 
-#deleteButton {
-    -fx-graphic: url("../icons/trash-bin.png");
-    -fx-content-display: graphic-only;
-}
 
 .edit-btn {
     -fx-graphic: url("../icons/edit16px.png");
