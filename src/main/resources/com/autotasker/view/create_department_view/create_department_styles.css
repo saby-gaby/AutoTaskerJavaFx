@@ -15,6 +15,7 @@
     -fx-max-width: 300;
     -fx-alignment: center;
     -fx-spacing: 15;
+    -fx-padding: 5 0 0 0;
 }
 
 #addDepartmentBtn {

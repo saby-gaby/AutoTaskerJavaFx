@@ -24,6 +24,7 @@
                 <TableColumn fx:id="roleColumn" text="Role"/>
                 <TableColumn fx:id="departmentColumn" text="Department"/>
                 <TableColumn fx:id="editUserColumn" text="Edit" />
+                <TableColumn fx:id="emails" text="Emails" />
             </columns>
         </TableView>
     </VBox>
@@ -40,6 +41,21 @@
                 <TableColumn fx:id="deptNameColumn" text="Name"/>
                 <TableColumn fx:id="managerColumn" text="Manager"/>
                 <TableColumn fx:id="editDepartmentColumn" text="Edit" />
+            </columns>
+        </TableView>
+    </VBox>
+    <VBox styleClass="emailSection">
+        <HBox>
+            <HBox HBox.hgrow="ALWAYS" styleClass="filterCheckbox">
+                <Label text="Emails" styleClass="emailLabel"/>
+            </HBox>
+            <Button text="+ Create Email" onAction="#showCreateEmailWindow" />
+        </HBox>
+        <TableView fx:id="emailTable">
+            <columns>
+                <TableColumn fx:id="emailColumn" text="Email"/>
+                <TableColumn fx:id="ownerColumn" text="Owner"/>
+                <TableColumn fx:id="editEmailColumn" text="Edit" />
             </columns>
         </TableView>
     </VBox>

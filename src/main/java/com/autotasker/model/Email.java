@@ -14,7 +14,7 @@ public class Email {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "owner", nullable = false)
     private User owner;
 
@@ -24,14 +24,6 @@ public class Email {
         this.emailId = emailId;
         this.email = email;
         this.owner = owner;
-    }
-
-    public long getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(long emailId) {
-        this.emailId = emailId;
     }
 
     public String getEmail() {

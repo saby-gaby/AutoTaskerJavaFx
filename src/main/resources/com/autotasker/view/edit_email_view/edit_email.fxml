@@ -7,20 +7,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Region?>
-
-<VBox fx:controller="com.autotasker.controller.EditDepartmentController"
+<VBox fx:controller="com.autotasker.controller.EditEmailController"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      stylesheets="@edit_department_styles.css"
+      stylesheets="@edit_email_styles.css"
       styleClass="root">
-    <VBox>
-        <Label text="Department Name" />
-        <TextField fx:id="departmentNameField" />
-    </VBox>
-    <VBox>
-        <Label text="Department Manager" />
-        <ComboBox fx:id="departmentManagerCombobox" />
-    </VBox>
+    <HBox>
+        <Label styleClass="labelBox" text="Email Address" />
+        <TextField fx:id="emailField" />
+    </HBox>
+    <HBox>
+        <Label styleClass="labelBox" text="Owner" />
+        <ComboBox fx:id="ownerCombobox" />
+    </HBox>
 
     <HBox styleClass="edit-window-buttons" >
         <Button fx:id="saveButton" text="Save" />
