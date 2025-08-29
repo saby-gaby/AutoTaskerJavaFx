@@ -22,13 +22,13 @@ public class EditDepartmentController {
     @FXML private Button saveButton;
     @FXML private Button deleteButton;
 
-    private final DepartmentDAO departmentDAO = new DepartmentDAO();
-    private final UserDAO userDAO = new UserDAO();
+    private final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
+    private final UserDAO USER_DAO = new UserDAO();
 
     public void initFields(Department department, TableView<Department> departmentTable, TableView<User> userTable) {
         departmentNameField.setText(department.getDepartmentName());
 
-        ComboboxUtil.initDepartmentManagerDropdown(departmentDAO, userDAO, departmentManagerCombobox, department.getDepartmentManager(), department);
+        ComboboxUtil.initDepartmentManagerDropdown(DEPARTMENT_DAO, USER_DAO, departmentManagerCombobox, department.getDepartmentManager(), department);
         departmentManagerCombobox.getSelectionModel().select(department.getDepartmentManager());
         saveButton.setOnAction(e -> updateDepartment(userTable, department, departmentTable));
         deleteButton.setOnAction(e -> deleteDepartment(department, departmentTable, userTable));
@@ -44,22 +44,22 @@ public class EditDepartmentController {
 
         if (oldManager != null) {
             oldManager.setRole(Role.USER);
-            isOldManagerUpdated = userDAO.updateUser(oldManager);
+            isOldManagerUpdated = USER_DAO.updateUser(oldManager);
         }
 
         if (newManager != null) {
             newManager.setRole(Role.ADMIN);
-            isNewManagerUpdated = userDAO.updateUser(newManager);
+            isNewManagerUpdated = USER_DAO.updateUser(newManager);
         }
 
-        boolean isDepartmentUpdated = departmentDAO.updateDepartment(department);
+        boolean isDepartmentUpdated = DEPARTMENT_DAO.updateDepartment(department);
 
         if (isDepartmentUpdated &&
                 ((oldManager == null || isOldManagerUpdated) && (newManager == null || isNewManagerUpdated))) {
             new InformationAlert("Department updated successfully");
-            LoadTableUtil.loadDepartmentTable(departmentTable, departmentDAO);
+            LoadTableUtil.loadDepartmentTable(departmentTable, DEPARTMENT_DAO);
             if (isOldManagerUpdated || isNewManagerUpdated)
-                LoadTableUtil.loadUserTable(userTable, userDAO);
+                LoadTableUtil.loadUserTable(userTable, USER_DAO);
 
             Stage stage = (Stage) saveButton.getScene().getWindow();
             stage.close();
@@ -68,7 +68,7 @@ public class EditDepartmentController {
 
     private void deleteDepartment(Department department, TableView<Department> departmentTable, TableView<User> userTable) {
         if (department != null) {
-            List<User> usersInThisDepartment = userDAO.getUsersByDepartment(department);
+            List<User> usersInThisDepartment = USER_DAO.getUsersByDepartment(department);
             Optional<ButtonType> buttonType;
             String departmentName = department.getDepartmentName();
             while (!usersInThisDepartment.isEmpty()) {
@@ -89,15 +89,15 @@ public class EditDepartmentController {
                 } else {
                     return;
                 }
-                userTable.getItems().setAll(userDAO.findAll());
-                usersInThisDepartment = userDAO.getUsersByDepartment(department);
+                userTable.getItems().setAll(USER_DAO.findAll());
+                usersInThisDepartment = USER_DAO.getUsersByDepartment(department);
             }
             buttonType = new ConfirmationUtil(
                     "Are you sure you want to delete department  '" + departmentName + "'?"
             ).showAndWait();
             if (buttonType.isPresent() && buttonType.get() == ButtonType.OK) {
-                departmentDAO.deleteDepartment(department);
-                departmentTable.getItems().setAll(departmentDAO.findAll());
+                DEPARTMENT_DAO.deleteDepartment(department);
+                departmentTable.getItems().setAll(DEPARTMENT_DAO.findAll());
                 Stage stage = (Stage) deleteButton.getScene().getWindow();
                 stage.close();
             }
@@ -106,7 +106,7 @@ public class EditDepartmentController {
 
     private void showChangeDepartmentDialog(User user) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/change_user_department_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/change_user_department_view/change_user_department.fxml"));
             Parent root = loader.load();
 
             EditDepartmentForUserController controller = loader.getController();
@@ -118,7 +118,7 @@ public class EditDepartmentController {
             stage.showAndWait();
 
         } catch (IOException e) {
-            new WarningAlert("Could not load change_user_department_view.fxml").showAndWait();
+            new WarningAlert("Could not load change_user_department.fxml").showAndWait();
         }
     }
 

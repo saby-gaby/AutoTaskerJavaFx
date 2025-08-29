@@ -1,12 +1,21 @@
+.root {
+    -fx-min-width: 1100;
+    -fx-padding: 10;
+}
+
+#welcomeBox {
+    -fx-alignment: center;
+}
+
 #welcomeLabel {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-fill: #017301;
 }
 
-
-.user-window,
-.filter-checkbox,
-.filter-by-date {
+.root,
+.filterCheckbox,
+.filterByDate {
     -fx-spacing: 10;
     -fx-font-size: 16;
 }
@@ -15,7 +24,7 @@
     -fx-pref-width: 160;
 }
 
-.search-box {
+.searchBox {
     -fx-alignment: top-right;
     -fx-spacing: 10;
     -fx-hgrow: always;
@@ -26,8 +35,12 @@
     -fx-min-width: 200;
 }
 
-.task-table {
-    -fx-pref-height: 350;
+.taskTableBox {
+    -fx-alignment: center;
+}
+
+.taskTable {
+    -fx-pref-height: 400;
 }
 
 #nameColumn {
@@ -42,73 +55,77 @@
     -fx-pref-width: 120;
 }
 
-.action-buttons {
+.actionButtons {
     -fx-alignment: center-right;
 }
 
-.label-completed {
+.labelCompleted {
     -fx-text-fill: #017301;
     -fx-font-weight: bold;
 }
 
-.label-inProgress {
+.labelInProgress {
     -fx-text-fill: #29c4c4;
     -fx-font-weight: bold;
 }
 
-.label-todo {
+.labelToDo {
     -fx-text-fill: rgb(203, 23, 17);
     -fx-font-weight: bold;
 }
 
-.filter-checkbox{
+.filterCheckbox{
     -fx-alignment: center-left;
 }
 
-.filter-buttons{
+.filterButtons{
     -fx-alignment: top-center;
     -fx-spacing: 10;
     -fx-hgrow: always;
 }
 
-.filter-by-date {
+.filterByDate {
     -fx-alignment: top-right;
 }
 
-.completed-progress-box {
+.completedProgressBox {
     -fx-spacing: 10;
 }
 
-.add-task-box {
+.addTaskBox {
     -fx-spacing: 10;
     -fx-padding: 10px 10px 0px 10px;
 }
 
 
-.edit-btn {
-    -fx-graphic: url("../icons/edit16px.png");
+.editBtn {
+    -fx-graphic: url("../../icons/edit16px.png");
     -fx-content-display: graphic-only;
     -fx-padding: 5 7;
     -fx-background-color: transparent;
 }
 
-.in-progress-btn {
-    -fx-graphic: url("../icons/process.png");
+.inProgressBtn {
+    -fx-graphic: url("../../icons/process.png");
     -fx-content-display: graphic-only;
     -fx-padding: 5 7;
     -fx-background-color: transparent;
 }
 
-.completed-btn {
-    -fx-graphic: url("../icons/checked.png");
+.completedBtn {
+    -fx-graphic: url("../../icons/checked.png");
     -fx-content-display: graphic-only;
     -fx-padding: 5 7;
     -fx-background-color: transparent;
 }
 
-.edit-btn:hover,
-.in-progress-btn:hover,
-.completed-btn:hover {
+.editBtn:hover,
+.inProgressBtn:hover,
+.completedBtn:hover,
+.editBtn:focused,
+.inProgressBtn:focused,
+.completedBtn:focused{
     -fx-background-color: rgba(255, 192, 203, 0.75);
     -fx-background-radius: 50%;
 }
+

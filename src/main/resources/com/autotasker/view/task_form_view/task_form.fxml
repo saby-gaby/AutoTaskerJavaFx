@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.layout.HBox?>
+<VBox fx:controller="com.autotasker.controller.TaskFormController"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@task_form_styles.css"
+      styleClass="root">
+
+    <HBox>
+        <Label text="Task name" />
+        <TextField fx:id="taskNameField" promptText="Task name"/>
+    </HBox>
+    <HBox>
+        <Label text="Description" />
+        <TextField fx:id="taskDescriptionField" promptText="Task description"/>
+    </HBox>
+    <HBox>
+        <Label text="Due date" />
+        <DatePicker fx:id="dueDatePicker" promptText="MM/DD/YYYY"/>
+    </HBox>
+    <VBox>
+        <Label text="Assign to" />
+        <HBox id="comboboxBox">
+            <ComboBox fx:id="departmentComboBox" promptText="Select Department"/>
+            <ComboBox fx:id="userComboBox" promptText="Select User"/>
+        </HBox>
+    </VBox>
+
+    <HBox id="buttonBox">
+        <HBox HBox.hgrow="ALWAYS" >
+            <Button id="addTaskBtn" text="Add Task" onAction="#handleAddTask"/>
+        </HBox>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+</VBox>

@@ -5,7 +5,6 @@ import com.autotasker.dao.UserDAO;
 import com.autotasker.model.Department;
 import com.autotasker.model.User;
 import javafx.scene.control.TableView;
-
 import java.util.ArrayList;
 
 public class LoadTableUtil {

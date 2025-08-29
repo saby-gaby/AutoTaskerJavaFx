@@ -39,10 +39,10 @@ public class UserViewController {
     @FXML private CheckBox filterCompleteCheckBox;
     @FXML private Button adminViewBtn;
 
+    private final TaskDAO TASK_DAO = new TaskDAO();
     private User loggedInUser;
     private List<Task> filteredByUser;
     private List<Task> filteredByDepartment;
-    private final TaskDAO taskDAO = new TaskDAO();
     private List<Task> allTasksCache = new ArrayList<>();
     private boolean isMyTaskFilterActive = false;
     private boolean isUpcomingSelected = false;
@@ -96,16 +96,16 @@ public class UserViewController {
                 } else {
                     Task task = getTableRow().getItem();
                     List<String> classes = getStyleClass();
-                    classes.removeAll(List.of("label-todo", "label-inProgress", "label-completed"));
+                    classes.removeAll(List.of("labelToDo", "labelInProgress", "labelCompleted"));
                     if (task.isCompleted()) {
                         setText("✅ Completed");
-                        classes.add("label-completed");
+                        classes.add("labelCompleted");
                     } else if (task.isInProgress()) {
                         setText("⌛ In Progress");
-                        classes.add("label-inProgress");
+                        classes.add("labelInProgress");
                     } else {
                         setText("❌ To do");
-                        classes.add("label-todo");
+                        classes.add("labelToDo");
                     }
                 }
             }
@@ -130,9 +130,9 @@ public class UserViewController {
             private final Button editBtn = new Button("✎");
 
             {
-                setInProgressBtn.getStyleClass().add("in-progress-btn");
-                markCompleteBtn.getStyleClass().add("completed-btn");
-                editBtn.getStyleClass().add("edit-btn");
+                setInProgressBtn.getStyleClass().add("inProgressBtn");
+                markCompleteBtn.getStyleClass().add("completedBtn");
+                editBtn.getStyleClass().add("editBtn");
                 setInProgressBtn.setOnAction(event -> {
                     Task task = getTableView().getItems().get(getIndex());
                     handleSetInProgress(task);
@@ -180,7 +180,7 @@ public class UserViewController {
             taskTable.getColumns().add(actionsColumn);
         }
 
-        allTasksCache = taskDAO.getAllTasks();
+        allTasksCache = TASK_DAO.getAllTasks();
         // Load tasks initially
         loadTasks();
     }
@@ -198,17 +198,17 @@ public class UserViewController {
 
     public void setFilteredByUser(User user) {
         isMyTaskFilterActive = false;
-        this.filteredByUser = taskDAO.findByUser(user);
+        this.filteredByUser = TASK_DAO.findByUser(user);
     }
 
     public void setFilteredByDepartment(Department department) {
         isMyTaskFilterActive = false;
-        this.filteredByDepartment = taskDAO.findByDepartment(department);
+        this.filteredByDepartment = TASK_DAO.findByDepartment(department);
     }
 
     @FXML
     private void handleRefresh() {
-        allTasksCache = taskDAO.getAllTasks();
+        allTasksCache = TASK_DAO.getAllTasks();
         loadTasks();  // Refresh task table
     }
 
@@ -264,7 +264,7 @@ public class UserViewController {
     @FXML
     private void createNewTask() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/task_form.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/task_form_view/task_form.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -274,7 +274,7 @@ public class UserViewController {
             stage.showAndWait();
 
             // After closing form -> Refresh the task table
-            allTasksCache = taskDAO.getAllTasks();
+            allTasksCache = TASK_DAO.getAllTasks();
             loadTasks();
         } catch (IOException e) {
             new WarningAlert(e.getMessage()).showAndWait();
@@ -286,8 +286,8 @@ public class UserViewController {
         if (task != null) {
             task.setCompleted(true);
             task.setInProgress(false);
-            taskDAO.updateTask(task);
-            allTasksCache = taskDAO.getAllTasks();
+            TASK_DAO.updateTask(task);
+            allTasksCache = TASK_DAO.getAllTasks();
             loadTasks();  // Refresh task table
         }
     }
@@ -364,7 +364,7 @@ public class UserViewController {
 
     private void showTaskDetailDialog(Task task) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/task_detail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/task_detail_view/task_detail.fxml"));
             Parent root = loader.load();
 
             TaskDetailController controller = loader.getController();
@@ -383,11 +383,11 @@ public class UserViewController {
 
     private void openEditTaskDialog(Task task) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_task_dialog.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_task_view/edit_task.fxml"));
             Parent root = loader.load();
             EditTaskController controller = loader.getController();
-            controller.initializeFields(task, taskDAO, () -> {
-                allTasksCache = taskDAO.getAllTasks();
+            controller.initializeFields(task, TASK_DAO, () -> {
+                allTasksCache = TASK_DAO.getAllTasks();
                 loadTasks();
             });
 
@@ -407,8 +407,8 @@ public class UserViewController {
             return;
         }
         task.setInProgress(true);
-        taskDAO.updateTask(task);
-        allTasksCache = taskDAO.getAllTasks();
+        TASK_DAO.updateTask(task);
+        allTasksCache = TASK_DAO.getAllTasks();
         loadTasks();
     }
 
@@ -469,7 +469,7 @@ public class UserViewController {
     @FXML
     public void filterForUserOrDepartment() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/filter_user_department_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/filter_department_view/filter_user_department.fxml"));
             Parent root = loader.load();
 
             // getting pop-up controller
@@ -484,7 +484,7 @@ public class UserViewController {
             stage.showAndWait();
 
             // After closing form -> Refresh the task table
-            allTasksCache = taskDAO.getAllTasks();
+            allTasksCache = TASK_DAO.getAllTasks();
             loadTasks();
         } catch (IOException e) {
             new WarningAlert(e.getMessage()).showAndWait();
@@ -494,7 +494,7 @@ public class UserViewController {
     @FXML
     private void openAdminView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/admin_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/admin_view/admin_view.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -509,7 +509,7 @@ public class UserViewController {
     @FXML
     private void showUpdatePasswordWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/change_user_password_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/change_user_password/change_user_password.fxml"));
             Parent root = loader.load();
 
             ChangeUserPasswordController controller = loader.getController();

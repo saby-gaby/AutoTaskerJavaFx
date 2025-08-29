@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.autotasker.controller.TaskDetailController"
+      styleClass="root"
+      stylesheets="@task_detail_styles.css">
+    <HBox styleClass="labelBox">
+        <Label fx:id="nameLabel"/>
+    </HBox>
+    <HBox styleClass="labelBox">
+        <Label fx:id="assignedToLabel"/>
+    </HBox>
+    <HBox styleClass="labelBox">
+        <Label fx:id="dueDateLabel"/>
+    </HBox>
+    <VBox id="description">
+        <Label text="Description: "/>
+        <TextArea fx:id="descriptionArea" editable="false" wrapText="true"/>
+    </VBox>
+    <HBox styleClass="labelBox">
+        <Label fx:id="statusLabel"/>
+    </HBox>
+    <HBox styleClass="labelBox">
+        <Label fx:id="createDateLabel"/>
+    </HBox>
+    <HBox id="closeBtnBox">
+        <Button text="Close" onAction="#handleClose"/>
+    </HBox>
+</VBox>

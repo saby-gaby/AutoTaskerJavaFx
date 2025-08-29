@@ -22,13 +22,14 @@ public class EditUserController {
     @FXML private Button saveButton;
     @FXML private Button deleteButton;
 
-    private final UserDAO userDAO = new UserDAO();
-    private final DepartmentDAO departmentDAO = new DepartmentDAO();
+    private final UserDAO USER_DAO = new UserDAO();
+    private final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
 
     public void initFields(User user, TableView<User> userTable, Stage editStage) {
+        User currUser = USER_DAO.findByUsername(user.getUsername());
         ArrayList<Role> rolesList = new ArrayList<>(Arrays.asList(Role.values()));
         ComboboxUtil.initializeSortedDropdown(roleComboBox, rolesList, null);
-        ArrayList<Department> departmentsList = new ArrayList<>(departmentDAO.findAll());
+        ArrayList<Department> departmentsList = new ArrayList<>(DEPARTMENT_DAO.findAll());
         ComboboxUtil.initializeSortedDropdown(departmentComboBox, departmentsList, Department.class);
         // visible options for department
         ComboboxUtil.departmentCellFactory(departmentComboBox);
@@ -36,7 +37,7 @@ public class EditUserController {
         usernameField.setText(user.getUsername());
         usernameField.setEditable(false);
         roleComboBox.getSelectionModel().select(user.getRole());
-        departmentComboBox.getSelectionModel().select(user.getDepartment());
+        departmentComboBox.getSelectionModel().select(currUser.getDepartment());
         saveButton.setOnAction(e -> editUser(user, userTable, editStage));
         updatePasswordButton.setOnAction(e -> changePassword(user));
         deleteButton.setOnAction(e -> deleteUser(user, userTable));
@@ -47,7 +48,7 @@ public class EditUserController {
         Department oldDepartment = user.getDepartment();
         Department newDepartment = departmentComboBox.getSelectionModel().getSelectedItem();
         user.setDepartment(newDepartment);
-        Department departmentWithCurrentUserAsManager = departmentDAO.findByDepartmentManager(user);
+        Department departmentWithCurrentUserAsManager = DEPARTMENT_DAO.findByDepartmentManager(user);
         // user is department manager (user is foreign key in department - one to one)
         if (departmentWithCurrentUserAsManager != null && !oldDepartment.equals(newDepartment)) {
             new WarningAlert(
@@ -57,11 +58,11 @@ public class EditUserController {
             ).showAndWait();
             editStage.close();
         }else {
-            boolean isUpdated = userDAO.updateUser(user);
+            boolean isUpdated = USER_DAO.updateUser(user);
             if (isUpdated) {
                 new InformationAlert("User '" + user.getUsername() + "' successfully updated")
                         .showAndWait();
-                LoadTableUtil.loadUserTable(userTable, userDAO);
+                LoadTableUtil.loadUserTable(userTable, USER_DAO);
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 stage.close();
             }
@@ -70,7 +71,7 @@ public class EditUserController {
 
     private void deleteUser(User user, TableView<User> userTable) {
         if (user != null) {
-            Department department = departmentDAO.findByDepartmentManager(user);
+            Department department = DEPARTMENT_DAO.findByDepartmentManager(user);
             // user is department manager (user is foreign key in department - one to one)
             if (department != null) {
                 new WarningAlert(
@@ -80,10 +81,10 @@ public class EditUserController {
                 ).showAndWait();
             }
             // user is Not department manager
-            boolean isDeleted = userDAO.deleteUser(user);
+            boolean isDeleted = USER_DAO.deleteUser(user);
             if (isDeleted) {
                 new InformationAlert("User " + user.getUsername() + " has been deleted").showAndWait();
-                LoadTableUtil.loadUserTable(userTable, userDAO);
+                LoadTableUtil.loadUserTable(userTable, USER_DAO);
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 stage.close();
             }
@@ -100,7 +101,7 @@ public class EditUserController {
 
         if (bType.isPresent() && bType.get() == ButtonType.OK) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_user_password_view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_user_password_view/edit_user_password.fxml"));
                 Parent root = loader.load();
                 EditUserPasswordController controller = loader.getController();
                 controller.initWindow(user);

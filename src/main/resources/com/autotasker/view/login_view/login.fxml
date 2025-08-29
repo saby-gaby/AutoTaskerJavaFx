@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.autotasker.controller.LoginController"
+      stylesheets="@login_styles.css"
+      styleClass="root">
+    <Text text="Login to AutoTasker" />
+    <HBox styleClass="hBox">
+        <Label text="Username:" />
+        <TextField fx:id="usernameField" promptText="Username" />
+    </HBox>
+    <HBox styleClass="hBox">
+        <Label text="Password:" />
+        <PasswordField fx:id="passwordField" promptText="Password" />
+    </HBox>
+    <Button fx:id="loginButton" text="Login" onAction="#handleLogin" />
+</VBox>

@@ -18,7 +18,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.io.IOException;
 import java.util.Objects;
 
@@ -77,7 +76,7 @@ public class AdminController {
 
             // navigation to login.fxml
             Stage newStage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/autotasker/view/login.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/autotasker/view/login_view/login.fxml")));
             newStage.setScene(new Scene(root, 450, 200));
             newStage.setTitle("Login");
             newStage.show();

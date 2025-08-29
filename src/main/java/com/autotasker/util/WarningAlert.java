@@ -9,9 +9,4 @@ public class WarningAlert extends Alert {
         this.setTitle("Warning");
         this.setHeaderText(message);
     }
-
-    // Show an alert with a given message
-//    public void showAlert() {
-//        alert.showAndWait();
-//    }
 }

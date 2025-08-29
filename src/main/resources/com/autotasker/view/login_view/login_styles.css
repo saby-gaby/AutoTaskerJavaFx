@@ -1,0 +1,27 @@
+.root {
+    -fx-font-size: 16;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+.root TextField,
+.root PasswordField {
+    -fx-max-width: 200;
+}
+
+Label {
+    -fx-min-width: 100;
+}
+
+.hBox {
+    -fx-alignment: center;
+}
+
+#loginButton {
+    -fx-background-color: rgba(0, 128, 0, 0.25);
+}
+
+#loginButton:hover,
+#loginButton:focused {
+    -fx-border-color: rgba(0, 128, 0, 0.5);
+}

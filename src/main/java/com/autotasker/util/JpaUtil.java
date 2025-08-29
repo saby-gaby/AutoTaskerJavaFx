@@ -3,7 +3,6 @@ package com.autotasker.util;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -40,12 +39,6 @@ public class JpaUtil {
                     .createQuery("SELECT COUNT(u) FROM User u", Long.class)
                     .getSingleResult();
             return count > 0;
-        }
-    }
-
-    public static void shutdown() {
-        if (emf != null) {
-            emf.close();
         }
     }
 }

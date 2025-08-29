@@ -1,5 +1,6 @@
-mail.user={sample@gmail.com}(app full email addresse in gmail)
-mail.pass={xxxx xxxx xxxx xxxx}(app key for the address)
+mail.user={emailAddress}
+mail.pass={appKeyForTheEmailAddress}
 mail.imap.host=imap.gmail.com
 mail.smtp.host=smtp.gmail.com
 mail.smtp.port=587
+#Replace emailAddress and appKeyForTheEmailAddress with real ones

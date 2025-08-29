@@ -8,7 +8,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.autotasker.controller.FilterUserDepartmentController"
-      styleClass="filter-window"
+      styleClass="root"
       stylesheets="@filter_user_department_styles.css">
         <HBox styleClass="filter-box">
             <ComboBox fx:id="filterDepartmentComboBox" />
@@ -17,6 +17,6 @@
 
     <HBox styleClass="edit-window-buttons" >
         <Button fx:id="filterBtn" text="Filter" onAction="#handleFilter" />
-        <Button fx:id="cancelFilterBtn" text="Cancel" onAction="#handleCancel" />
+        <Button text="Cancel" onAction="#handleCancel" />
     </HBox>
 </VBox>

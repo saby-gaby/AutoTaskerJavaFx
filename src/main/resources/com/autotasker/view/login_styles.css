@@ -1,9 +1,0 @@
-.loginWindow {
-    -fx-alignment: center;
-    -fx-spacing: 10;
-}
-
-.loginWindow TextField,
-.loginWindow PasswordField {
-    -fx-max-width: 200;
-}

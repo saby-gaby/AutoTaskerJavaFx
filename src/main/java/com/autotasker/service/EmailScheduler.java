@@ -1,11 +1,13 @@
 package com.autotasker.service;
 
 import com.autotasker.model.EmailMessage;
-
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// not used because Timer may block if a task throws an exception or is delayed
+// decided for ScheduledExecutorService because works with threads and is more flexible
+// (for example, you can stop the scheduler, add other tasks, etc.)
 public class EmailScheduler {
     private final EmailService emailService;
     private final long intervalMillis;
@@ -22,12 +24,7 @@ public class EmailScheduler {
             public void run() {
                 try {
                     List<EmailMessage> newEmails = emailService.fetchUnreadEmails();
-//                    List<EmailMessage> newEmails = emailService.fetchUnreadEmails();
-                    if (!newEmails.isEmpty()) {
-                        System.out.println("New mails: " + newEmails.size());
-                        newEmails.forEach(msg ->
-                                System.out.println(msg.getSubject() + " from " + msg.getFrom()));
-                    }
+                    // Logic with newEmails-list
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -35,3 +32,8 @@ public class EmailScheduler {
         }, 0, intervalMillis);
     }
 }
+// usage: in EmailBackgroundMain
+//        EmailService emailService = new EmailService();
+//        every 60 secs
+//        EmailScheduler scheduler = new EmailScheduler(emailService, 60_000);
+//        scheduler.start();

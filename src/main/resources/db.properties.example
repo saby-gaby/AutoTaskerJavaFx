@@ -1,5 +1,5 @@
 javax.persistence.jdbc.driver=com.mysql.cj.jdbc.Driver
-javax.persistence.jdbc.url=jdbc:mysql://{host}:{port}/autotasker?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+javax.persistence.jdbc.url=jdbc:mysql://{host}:{port}/{dbName}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
 javax.persistence.jdbc.user={username}
 javax.persistence.jdbc.password={password}
 hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
@@ -8,3 +8,4 @@ hibernate.show_sql=true
 hibernate.format_sql=true
 hibernate.c3p0.min_size=5
 hibernate.c3p0.max_size=20
+#Replace port, host, dbName, username and password with real ones

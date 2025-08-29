@@ -1,0 +1,20 @@
+.root {
+    -fx-spacing: 15;
+    -fx-padding: 15;
+    -fx-min-width: 400;
+    -fx-alignment: center;
+    -fx-font-size: 16;
+}
+
+.buttonBox {
+    -fx-spacing: 20;
+}
+
+#addUserBtn {
+    -fx-background-color: rgba(0, 128, 0, 0.25);
+}
+
+#addUserBtn:hover,
+#addUserBtn:focused {
+    -fx-border-color: rgba(0, 128, 0, 0.5);
+}

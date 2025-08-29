@@ -14,22 +14,24 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.autotasker.controller.UserViewController"
-      styleClass="user-window"
+      styleClass="root"
       stylesheets="@user_view_styles.css">
-    <Label fx:id="welcomeLabel"/>
-    <HBox styleClass="add-task-box">
+    <HBox id="welcomeBox">
+        <Label fx:id="welcomeLabel"/>
+    </HBox>
+    <HBox styleClass="addTaskBox">
         <Button id="addTask" text="New Task" onAction="#createNewTask"/>
         <Button id="refreshButton" text="Refresh Table" onAction="#handleRefresh"/>
-        <HBox styleClass="search-box" HBox.hgrow="ALWAYS">
+        <HBox styleClass="searchBox" HBox.hgrow="ALWAYS">
             <Button id="filterFor" text="Filter for User/Department" onAction="#filterForUserOrDepartment"/>
         </HBox>
-        <HBox styleClass="search-box" HBox.hgrow="ALWAYS">
+        <HBox styleClass="searchBox" HBox.hgrow="ALWAYS">
             <Button id="searchMyTasks" text="My Tasks" onAction="#loadMyTasks"/>
             <TextField fx:id="searchField" promptText="Search tasks"/>
         </HBox>
     </HBox>
-    <VBox>
-        <TableView fx:id="taskTable" styleClass="task-table">
+    <VBox styleClass="taskTableBox">
+        <TableView fx:id="taskTable" styleClass="taskTable">
             <columns>
                 <TableColumn fx:id="rowNumberColumn" text="No."/>
                 <TableColumn fx:id="nameColumn" text="Name"/>
@@ -41,22 +43,24 @@
             </columns>
         </TableView>
         <ToolBar>
-            <HBox HBox.hgrow="ALWAYS" styleClass="filter-checkbox">
+            <HBox HBox.hgrow="ALWAYS" styleClass="filterCheckbox">
                 <CheckBox fx:id="filterIncompleteCheckBox" onAction="#loadTasks" text="Unfinished"/>
                 <CheckBox fx:id="filterCompleteCheckBox" onAction="#loadTasks" text="Completed"/>
             </HBox>
-            <HBox styleClass="filter-buttons">
+            <HBox styleClass="filterButtons">
                 <Button onAction="#handleShowAllTasks" text="Show all"/>
                 <Button fx:id="upcomingButton" onAction="#handleShowUpcoming" text="Upcoming"/>
             </HBox>
-            <HBox HBox.hgrow="ALWAYS" styleClass="filter-by-date">
+            <HBox HBox.hgrow="ALWAYS" styleClass="filterByDate">
                 <DatePicker fx:id="filterDatePicker" promptText="MM/DD/YYYY"/>
                 <Button onAction="#handleFilterByDate" text="Filter for date"/>
             </HBox>
         </ToolBar>
     </VBox>
     <HBox>
-        <Button fx:id="adminViewBtn" text="Admin View" onAction="#openAdminView" />
+        <HBox HBox.hgrow="ALWAYS">
+            <Button fx:id="adminViewBtn" text="Admin View" onAction="#openAdminView" />
+        </HBox>
         <Button text="Change My Password" onAction="#showUpdatePasswordWindow"/>
     </HBox>
 

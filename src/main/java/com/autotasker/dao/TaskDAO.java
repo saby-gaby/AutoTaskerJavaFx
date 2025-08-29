@@ -6,8 +6,6 @@ import com.autotasker.model.User;
 import com.autotasker.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -58,24 +56,18 @@ public class TaskDAO {
     }
 
     public List<Task> findByUser(User user) {
-        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        try {
+        try (EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager()) {
             return em.createQuery("SELECT t FROM Task t WHERE t.assignedUser = :user", Task.class)
                     .setParameter("user", user)
                     .getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Task> findByDepartment(Department department) {
-        EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
-        try {
+        try (EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager()) {
             return em.createQuery("SELECT t FROM Task t WHERE t.assignedDepartment = :dep", Task.class)
                     .setParameter("dep", department)
                     .getResultList();
-        } finally {
-            em.close();
         }
     }
 }

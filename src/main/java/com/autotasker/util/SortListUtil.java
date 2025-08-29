@@ -2,7 +2,6 @@ package com.autotasker.util;
 
 import com.autotasker.model.Department;
 import com.autotasker.model.User;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 

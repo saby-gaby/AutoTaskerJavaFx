@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<VBox fx:controller="com.autotasker.controller.EditDepartmentForUserController"
+<?import javafx.scene.layout.Region?>
+
+<VBox fx:controller="com.autotasker.controller.EditUserController"
       xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml">
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@edit_user_styles.css"
+      styleClass="editUserView">
     <VBox>
         <Label text="Username"/>
         <TextField fx:id="usernameField" />
     </VBox>
     <VBox>
+        <Label text="Role" />
+        <ComboBox fx:id="roleComboBox" />
+    </VBox>
+    <VBox>
         <Label text="Department" />
         <ComboBox fx:id="departmentComboBox" />
     </VBox>
+
+    <HBox id="updatePasswordButtonBox">
+        <Button fx:id="updatePasswordButton" text="Change Password for this User" />
+    </HBox>
     <HBox styleClass="edit-window-buttons" >
         <Button fx:id="saveButton" text="Save Changes" />
         <Button id="cancelButton" text="Cancel" onAction="#handleCancel" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="deleteButton" text="Delete task" />
     </HBox>
 </VBox>

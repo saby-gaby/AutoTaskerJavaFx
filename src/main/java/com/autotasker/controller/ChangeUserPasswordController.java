@@ -4,7 +4,6 @@ import com.autotasker.dao.UserDAO;
 import com.autotasker.model.User;
 import com.autotasker.util.InformationAlert;
 import com.autotasker.util.WarningAlert;
-import jakarta.persistence.PreUpdate;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

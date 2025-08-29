@@ -1,0 +1,36 @@
+.root {
+    -fx-min-width: 600;
+    -fx-min-height: 600;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-font-size: 16;
+}
+
+.nameLabel,
+.departmentLabel {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+.edit-btn {
+    -fx-graphic: url("../../icons/edit16px.png");
+    -fx-content-display: graphic-only;
+    -fx-padding: 5 7;
+    -fx-background-color: transparent;
+}
+
+.userSection,
+.departmentSection {
+    -fx-max-width: 500;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-border-color: transparent transparent #2a9d8f transparent; /* top, right, bottom, left */
+    -fx-border-width: 0 0 2 0; /* top, right, bottom, left */
+    -fx-border-style: solid;
+}
+
+#departmentTable,
+#userTable {
+    -fx-pref-height: 250;
+
+}

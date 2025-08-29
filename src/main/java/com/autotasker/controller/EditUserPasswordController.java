@@ -33,10 +33,12 @@ public class EditUserPasswordController {
         } else if (password.equals(confirmedPassword)) {
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             user.setPasswordHash(hashedPassword);
-            new UserDAO().updateUser(user);
-            new InformationAlert("Password changed successfully").showAndWait();
-            Stage currentStage = (Stage) confirmedPasswordField.getScene().getWindow();
-            currentStage.close();
+            boolean isPasswordUpdated = new UserDAO().updateUser(user);
+            if (isPasswordUpdated) {
+                new InformationAlert("Password changed successfully").showAndWait();
+                Stage currentStage = (Stage) confirmedPasswordField.getScene().getWindow();
+                currentStage.close();
+            }
         } else {
             new WarningAlert("Passwords do not match.").showAndWait();
         }

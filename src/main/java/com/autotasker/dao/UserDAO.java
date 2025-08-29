@@ -1,15 +1,12 @@
 package com.autotasker.dao;
 
 import com.autotasker.model.Department;
-import com.autotasker.model.Task;
 import com.autotasker.model.User;
 import com.autotasker.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
@@ -24,6 +21,7 @@ public class UserDAO {
 
     public User saveInitUser(User user) {
         em.persist(user);
+        em.clear();
         return findByUsername(user.getUsername());
     }
 

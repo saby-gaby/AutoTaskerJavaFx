@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 public class EmailBackgroundMain {
     private static final EmailService E_SERVICE = new EmailService();
-    private static final EmailDAO DAO = new EmailDAO();
+    private static final EmailDAO EMAIL_DAO = new EmailDAO();
     private static final TaskDAO TASK_DAO = new TaskDAO();
     private static final UserDAO USER_DAO = new UserDAO();
     private static final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
@@ -53,7 +53,7 @@ public class EmailBackgroundMain {
 
     private static void handleMessage(EmailMessage msg) {
         String from = msg.getFrom();
-        boolean isEmailInDB = DAO.isEmailPresent(from.substring(from.indexOf("<") + 1, from.indexOf(">")));
+        boolean isEmailInDB = EMAIL_DAO.isEmailPresent(from.substring(from.indexOf("<") + 1, from.indexOf(">")));
 
         // if the sender is not in the DB -> ignore and mark "seen"
         if (!isEmailInDB) {

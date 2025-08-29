@@ -20,11 +20,11 @@ public class EditDepartmentForUserController {
     @FXML private ComboBox<Department> departmentComboBox;
     @FXML private Button saveButton;
 
-    private final DepartmentDAO departmentDAO = new DepartmentDAO();
-    private final UserDAO userDAO = new UserDAO();
+    private final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
+    private final UserDAO USER_DAO = new UserDAO();
 
     public void initFields(User user) {
-        ArrayList<Department> departmentsList = new ArrayList<>(departmentDAO.findAll());
+        ArrayList<Department> departmentsList = new ArrayList<>(DEPARTMENT_DAO.findAll());
         ComboboxUtil.initializeSortedDropdown(departmentComboBox, departmentsList, Department.class);
         // visible options for department
         ComboboxUtil.departmentCellFactory(departmentComboBox);
@@ -36,7 +36,7 @@ public class EditDepartmentForUserController {
 
     private void saveNewDepartment(User user) {
         user.setDepartment(departmentComboBox.getSelectionModel().getSelectedItem());
-        boolean isUpdated = userDAO.updateUser(user);
+        boolean isUpdated = USER_DAO.updateUser(user);
         if (isUpdated) {
             new InformationAlert(
                     user.getUsername() + "'s department has been updated to '" +

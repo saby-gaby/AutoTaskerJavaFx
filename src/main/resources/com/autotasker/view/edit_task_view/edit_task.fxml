@@ -13,8 +13,8 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.autotasker.controller.EditTaskController"
-      styleClass="edit-task-window"
-      stylesheets="@edit_task_styles.css">
+      stylesheets="@edit_task_styles.css"
+      styleClass="root">
     <VBox>
         <Label text="Name"/>
         <TextField fx:id="nameField" />
@@ -25,7 +25,7 @@
     </VBox>
     <VBox>
         <Label text="Assigned to" />
-        <HBox>
+        <HBox styleClass="comboboxBox">
             <ComboBox fx:id="departmentComboBox" />
             <ComboBox fx:id="userComboBox" />
         </HBox>
@@ -35,7 +35,7 @@
         <DatePicker fx:id="dueDatePicker" promptText="MM/DD/YYYY" />
     </VBox>
 
-    <HBox styleClass="completed-progress-box">
+    <HBox styleClass="completedProgressBox">
         <CheckBox fx:id="completedCheckBox" text="Completed" />
         <CheckBox fx:id="inProgressCheckBox" text="In Progress" />
     </HBox>

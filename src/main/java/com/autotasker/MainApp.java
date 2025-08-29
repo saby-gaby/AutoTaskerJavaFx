@@ -12,14 +12,14 @@ import java.util.Objects;
 
 public class MainApp extends Application {
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         boolean hasUsers = JpaUtil.hasAnyUsers();
 
         String fxmlToLoad;
         String title;
 
         if (hasUsers) {
-            fxmlToLoad = "/com/autotasker/view/login.fxml";
+            fxmlToLoad = "/com/autotasker/view/login_view/login.fxml";
             title = "Login";
         } else {
             fxmlToLoad = "/com/autotasker/view/create_admin.fxml";

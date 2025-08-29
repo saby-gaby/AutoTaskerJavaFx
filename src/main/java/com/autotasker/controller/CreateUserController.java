@@ -23,14 +23,14 @@ public class CreateUserController {
     @FXML private ComboBox<Role> userRoleComboBox;
     @FXML private ComboBox<Department> departmentComboBox;
 
-    UserDAO userDAO = new UserDAO();
-    DepartmentDAO departmentDAO = new DepartmentDAO();
+    private final UserDAO USER_DAO = new UserDAO();
+    private final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
 
     @FXML
     public void initialize() {
         ArrayList<Role> rolesList = new ArrayList<>(Arrays.asList(Role.values()));
         ComboboxUtil.initializeSortedDropdown(userRoleComboBox, rolesList, null);
-        ArrayList<Department> departmentsList = new ArrayList<>(departmentDAO.findAll());
+        ArrayList<Department> departmentsList = new ArrayList<>(DEPARTMENT_DAO.findAll());
         ComboboxUtil.initializeSortedDropdown(departmentComboBox, departmentsList, Department.class);
         // visible options for department
         ComboboxUtil.departmentCellFactory(departmentComboBox);
@@ -48,7 +48,7 @@ public class CreateUserController {
             return;
         }
 
-        if (userDAO.findAllUsernames().contains(username)) {
+        if (USER_DAO.findAllUsernames().contains(username)) {
             new WarningAlert("Username already exists!").showAndWait();
             return;
         }
@@ -61,7 +61,7 @@ public class CreateUserController {
         user.setRole(userRole);
         user.setDepartment(department);
 
-        user = userDAO.saveUser(user);
+        user = USER_DAO.saveUser(user);
         if (user != null) {
             String msg = username + " - " + user.getRole().toString() + " in " +
                     user.getDepartment().getDepartmentName() +

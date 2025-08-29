@@ -1,7 +1,6 @@
 package com.autotasker.util;
 
 import com.autotasker.service.EmailService;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
@@ -16,7 +15,7 @@ public class EmailPropsUtil {
                 properties.load(in);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            new WarningAlert(e.getMessage()).showAndWait();
         }
     }
 

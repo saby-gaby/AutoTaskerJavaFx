@@ -1,0 +1,23 @@
+.root {
+    -fx-spacing: 15;
+    -fx-padding: 15;
+    -fx-font-size: 16;
+}
+
+#descriptionArea {
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.labelBox,
+#description{
+    -fx-padding: 5 0;
+    -fx-border-color: transparent transparent #2a9d8f transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-style: dotted;
+}
+
+#closeBtnBox {
+    -fx-alignment: center-right;
+}

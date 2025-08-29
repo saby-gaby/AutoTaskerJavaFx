@@ -9,12 +9,12 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.autotasker.controller.AdminViewController"
       stylesheets="@admin_view_styles.css"
-      styleClass="admin-view" >
+      styleClass="root" >
 
     <VBox styleClass="userSection">
         <HBox>
-            <HBox HBox.hgrow="ALWAYS" styleClass="filter-checkbox">
-                <Label text="Users" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <HBox HBox.hgrow="ALWAYS" styleClass="filterCheckbox">
+                <Label text="Users" styleClass="nameLabel"/>
             </HBox>
             <Button text="+ Create User" onAction="#showCreateUserWindow" />
         </HBox>
@@ -30,12 +30,12 @@
 
     <VBox styleClass="departmentSection">
         <HBox>
-            <HBox HBox.hgrow="ALWAYS" styleClass="filter-checkbox">
-                <Label text="Departments" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <HBox HBox.hgrow="ALWAYS" styleClass="filterCheckbox">
+                <Label text="Departments" styleClass="departmentLabel"/>
             </HBox>
             <Button text="+ Create Department" onAction="#showCreateDepartmentWindow" />
         </HBox>
-        <TableView fx:id="departmentTable" prefHeight="200">
+        <TableView fx:id="departmentTable">
             <columns>
                 <TableColumn fx:id="deptNameColumn" text="Name"/>
                 <TableColumn fx:id="managerColumn" text="Manager"/>

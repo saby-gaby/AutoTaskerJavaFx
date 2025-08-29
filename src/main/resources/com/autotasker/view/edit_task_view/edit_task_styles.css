@@ -1,0 +1,40 @@
+.root {
+    -fx-min-width: 400;
+    -fx-spacing: 20;
+    -fx-padding: 15;
+    -fx-font-size: 16;
+}
+
+.comboboxBox {
+    -fx-spacing: 20;
+}
+
+.completedProgressBox {
+    -fx-padding: 5 0;
+    -fx-spacing: 30
+}
+
+
+.edit-window-buttons {
+    -fx-spacing: 20;
+}
+
+#saveButton {
+    -fx-background-color: rgba(0, 128, 0, 0.25);
+}
+
+#saveButton:hover,
+#saveButton:focused {
+    -fx-border-color: rgba(0, 120, 0, 0.25);
+}
+
+#deleteButton {
+    -fx-graphic: url("../../icons/trash-bin.png");
+    -fx-content-display: graphic-only;
+    -fx-background-color: rgba(255, 0, 0, 0.25);
+}
+
+#deleteButton:hover,
+#deleteButton:focused {
+    -fx-border-color: rgba(255, 0, 0, 0.5);
+}

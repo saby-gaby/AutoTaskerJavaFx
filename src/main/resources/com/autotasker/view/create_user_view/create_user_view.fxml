@@ -11,7 +11,8 @@
 <VBox fx:controller="com.autotasker.controller.CreateUserController"
       xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      style="-fx-spacing: 15; -fx-padding: 15; -fx-min-width: 400; -fx-alignment: center">
+      stylesheets="@create_user.css"
+      styleClass="root" >
     <VBox>
         <Label text="Username" />
         <TextField fx:id="usernameField" promptText="Username"/>
@@ -29,8 +30,10 @@
         <ComboBox fx:id="departmentComboBox" promptText="Select Department"/>
     </VBox>
 
-    <HBox>
-        <Button text="Add User" onAction="#handleAddUser"/>
+    <HBox styleClass="buttonBox">
+        <HBox HBox.hgrow="ALWAYS">
+            <Button id="addUserBtn" text="Add User" onAction="#handleAddUser"/>
+        </HBox>
         <Button text="Cancel" onAction="#handleCancel"/>
     </HBox>
 </VBox>

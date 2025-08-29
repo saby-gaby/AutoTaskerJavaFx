@@ -23,6 +23,7 @@ public class DepartmentDAO {
 
     public Department saveInitDepartment(Department department) {
         em.persist(department);
+        em.clear();
         return findByName(department.getDepartmentName());
     }
 

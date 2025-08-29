@@ -22,20 +22,6 @@ public class LoginController {
 
     private final UserDAO userDAO = new UserDAO();
 
-//    @FXML private void initialize() {
-//        EmailService emailService = new EmailService();
-//
-//        EmailScheduler scheduler = new EmailScheduler(emailService, 1000);
-//        scheduler.start();
-//
-//        try {
-//            emailService.sendEmail("sgudzenova@gmail.com", "AutoTasker test", "Hello from AutoTasker");
-//        } catch (MessagingException e) {
-//            new WarningAlert("Message not sent").showAndWait();
-//            e.printStackTrace();
-//        }
-//    }
-
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
@@ -48,14 +34,14 @@ public class LoginController {
             try {
                 // load FXML file from right directory
                 Stage newStage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/user_view_scene.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/user_view_view/user_view_scene.fxml"));
                 Parent root = loader.load();
 
                 UserViewController userViewController = loader.getController();
                 userViewController.setLoggedInUser(user);
                 userViewController.greetUser();
 
-                newStage.setScene(new Scene(root, 1200, 600));
+                newStage.setScene(new Scene(root));
                 newStage.setTitle("Autotasker");
                 newStage.show();
 

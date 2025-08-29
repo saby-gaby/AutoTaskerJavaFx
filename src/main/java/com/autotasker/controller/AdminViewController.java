@@ -29,8 +29,8 @@ public class AdminViewController {
     @FXML private TableColumn<Department, String> managerColumn;
     @FXML private TableColumn<Department, Void> editDepartmentColumn;
 
-    private final UserDAO userDAO = new UserDAO();
-    private final DepartmentDAO departmentDAO = new DepartmentDAO();
+    private final UserDAO USER_DAO = new UserDAO();
+    private final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
 
     @FXML
     public void initialize() {
@@ -43,7 +43,7 @@ public class AdminViewController {
         });
 
         // load users table
-        LoadTableUtil.loadUserTable(userTable, userDAO);
+        LoadTableUtil.loadUserTable(userTable, USER_DAO);
 
         // Departments
         deptNameColumn.setCellValueFactory(new PropertyValueFactory<>("departmentName"));
@@ -53,7 +53,7 @@ public class AdminViewController {
         });
 
         // load department table
-        LoadTableUtil.loadDepartmentTable(departmentTable, departmentDAO);
+        LoadTableUtil.loadDepartmentTable(departmentTable, DEPARTMENT_DAO);
 
         editUserColumn.setCellFactory(col -> new TableCell<>() {
             private final Button editButton = new Button("Edit");
@@ -107,7 +107,7 @@ public class AdminViewController {
     @FXML
     public void showCreateUserWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/create_user.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/create_user_view/create_user_view.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -116,7 +116,7 @@ public class AdminViewController {
             stage.showAndWait();
 
             // After closing form
-            LoadTableUtil.loadUserTable(userTable, userDAO);
+            LoadTableUtil.loadUserTable(userTable, USER_DAO);
         } catch (IOException e) {
             new WarningAlert(e.getMessage()).showAndWait();
         }
@@ -130,7 +130,7 @@ public class AdminViewController {
 
     private void openEditUserDialog(User currentUser) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_user_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_user_view/edit_user.fxml"));
             Parent root = loader.load();
             EditUserController controller = loader.getController();
             Stage stage = new Stage();
@@ -148,7 +148,7 @@ public class AdminViewController {
     @FXML
     private void showCreateDepartmentWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/create_department_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/create_department_view/create_department.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -156,8 +156,8 @@ public class AdminViewController {
             WindowUtil.setWindow(root, stage, departmentTable);
             stage.showAndWait();
 
-            LoadTableUtil.loadUserTable(userTable, userDAO);
-            LoadTableUtil.loadDepartmentTable(departmentTable, departmentDAO);
+            LoadTableUtil.loadUserTable(userTable, USER_DAO);
+            LoadTableUtil.loadDepartmentTable(departmentTable, DEPARTMENT_DAO);
         } catch (IOException e) {
             new WarningAlert(e.getMessage()).showAndWait();
         }
@@ -171,7 +171,7 @@ public class AdminViewController {
 
     private void openEditDepartmentDialog(Department currentDepartment) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_department_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/edit_department_view/edit_department.fxml"));
             Parent root = loader.load();
             EditDepartmentController controller = loader.getController();
             controller.initFields(currentDepartment, departmentTable, userTable);

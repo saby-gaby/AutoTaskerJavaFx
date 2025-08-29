@@ -17,15 +17,14 @@ public class FilterUserDepartmentController {
     @FXML private ComboBox<User> filterUserComboBox;
     @FXML private Button filterBtn;
 
-    private final UserDAO userDAO = new UserDAO();
-    private final DepartmentDAO departmentDAO = new DepartmentDAO();
+    private final UserDAO USER_DAO = new UserDAO();
+    private final DepartmentDAO DEPARTMENT_DAO = new DepartmentDAO();
     private UserViewController parentController;
-
 
     @FXML
     private void initialize() {
         ComboboxUtil.initializeAssignTaskDropdowns(
-                departmentDAO, userDAO, filterDepartmentComboBox, filterUserComboBox
+                DEPARTMENT_DAO, USER_DAO, filterDepartmentComboBox, filterUserComboBox
         );
     }
 

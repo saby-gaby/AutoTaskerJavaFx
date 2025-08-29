@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<VBox fx:controller="com.autotasker.controller.EditDepartmentForUserController"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@change_user_department_styles.css"
+      styleClass="changeUserDepartment">
+    <VBox>
+        <Label text="Username"/>
+        <TextField fx:id="usernameField"/>
+    </VBox>
+    <VBox>
+        <Label text="Department"/>
+        <ComboBox fx:id="departmentComboBox"/>
+    </VBox>
+    <HBox styleClass="edit-window-buttons">
+        <HBox HBox.hgrow="ALWAYS">
+            <Button fx:id="saveButton" text="Save Changes"/>
+        </HBox>
+        <Button id="cancelButton" text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+</VBox>

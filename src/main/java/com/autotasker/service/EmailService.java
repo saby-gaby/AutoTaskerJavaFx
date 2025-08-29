@@ -94,7 +94,7 @@ public class EmailService {
                 if (bodyPart.isMimeType("text/plain")) {
                     return bodyPart.getContent().toString();
                 } else if (bodyPart.isMimeType("text/html")) {
-                    return Jsoup.parse(bodyPart.getContent().toString()).text().toString();
+                    return Jsoup.parse(bodyPart.getContent().toString()).text();
                 }
             }
         }

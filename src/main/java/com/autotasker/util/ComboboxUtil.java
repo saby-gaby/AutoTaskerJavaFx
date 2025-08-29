@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +24,6 @@ public class ComboboxUtil {
         SortListUtil.sortList(userList, User.class);
         userList.add(0, null); // empty option
         initializeDropdown(userComboBox, userList);
-//        ObservableList<User> allUsers = FXCollections.observableArrayList(userList);
-//        userComboBox.setItems(allUsers);
 
         // CellFactory for Department
         departmentCellFactory(departmentComboBox);
@@ -143,10 +140,10 @@ public class ComboboxUtil {
         // empty option
         availableUsers.add(0, null);
         // if already there is manager
-//        if (currentDepartmentManager != null) {
-//            // add current manager first
-//            availableUsers.add(0, currentDepartmentManager);
-//        }
+        if (currentDepartmentManager != null) {
+            // add current manager first
+            availableUsers.add(0, currentDepartmentManager);
+        }
 
         // fill dropdown with available users
         ComboboxUtil.initializeDropdown(departmentManagerField, availableUsers);
