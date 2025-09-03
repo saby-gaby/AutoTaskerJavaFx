@@ -141,10 +141,15 @@ public class FuzzyTextExtractor {
 
         return switch (canonical.toLowerCase()) {
             case "name" -> segment.length() > 5 && !segment.equals(canonical) && !segment.contains("task-name");
-            case "description" -> segment.length() > 5 && !segment.equals(canonical) && !segment.contains("task-description");
-            case "duedate" ->
+            case "description" ->
+                    segment.length() > 5 && !segment.equals(canonical) && !segment.contains("task-description");
+            case "duedate" -> {
+                Pattern p = Pattern.compile(DATE_REGEX);
+                Matcher m = p.matcher(segment);
+                yield segment.matches(DATE_REGEX) || m.find();
+            }
                 // YYYY-MM-DD, DD-MM-YYYY, DD/MM/YYYY, YYYY/MM/DD, DD.MM.YYYY, YYYY.MM.DD
-                    segment.matches(DATE_REGEX);
+
             case "user" ->
                 // check for username in DB
                     findBestMatchIndexInList(USER_DAO.findAllUsernames(), segment) != -1;
@@ -182,7 +187,10 @@ public class FuzzyTextExtractor {
             }
             // check for substring match
             if (word.contains(candidate)) {
-                return i;
+                if (bestScore <= 1) {
+                    bestScore = 1.00000001f;
+                    bestIndex = i;
+                }
             }
             float score = METRIC.compare(word, candidate.toLowerCase());
             if (score > bestScore) {
@@ -217,14 +225,14 @@ public class FuzzyTextExtractor {
         return bestIndex != -1; // -1 if not find
     }
 
-    // test
-    public static void main(String[] args) {
-        String text = "Task Report Bug Description: Fix login issue task ds,fjheriurh DueDate: 2025-08-30-54  User: Saby Department: IT";
-
-        Map<String, String> extracted = extractSections(text);
-        extracted.forEach((k, v) -> System.out.println(k + " -> " + v));
-
-    }
+//    // test
+//    public static void main(String[] args) {
+//        String text = "Name: email test description: test the email function Due: 25-10-2025 evening User: PeterPan department: sales Thanks";
+//
+//        Map<String, String> extracted = extractSections(text);
+//        extracted.forEach((k, v) -> System.out.println(k + " -> " + v));
+//
+//    }
 }
 
 
