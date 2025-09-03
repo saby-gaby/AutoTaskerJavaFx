@@ -1,5 +1,5 @@
 .root {
-    -fx-min-width: 1100;
+    -fx-min-width: 1200;
     -fx-padding: 10;
 }
 
@@ -44,11 +44,11 @@
 }
 
 #nameColumn {
-    -fx-pref-width: 100;
+    -fx-pref-width: 250;
 }
 
 #descriptionColumn {
-    -fx-pref-width: 250;
+    -fx-pref-width: 200;
 }
 
 #dueDateColumn, #actionsColumn {

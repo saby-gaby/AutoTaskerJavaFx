@@ -32,9 +32,12 @@
     </HBox>
     <VBox styleClass="taskTableBox">
         <TableView fx:id="taskTable" styleClass="taskTable">
+            <columnResizePolicy>
+                <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
             <columns>
                 <TableColumn fx:id="rowNumberColumn" text="No."/>
-                <TableColumn fx:id="nameColumn" text="Name"/>
+                <TableColumn fx:id="nameColumn" text="Name" prefWidth="280" minWidth="220"/>
                 <TableColumn fx:id="descriptionColumn" text="Description"/>
                 <TableColumn fx:id="dueDateColumn" text="Due Date"/>
                 <TableColumn fx:id="statusColumn" text="Status"/>

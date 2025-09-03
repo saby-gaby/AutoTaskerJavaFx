@@ -270,7 +270,7 @@ public class AdminViewController {
     @FXML
     public void showCreateEmailWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/create_email.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/autotasker/view/create_email_view/create_email.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
